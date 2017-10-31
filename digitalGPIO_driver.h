@@ -1,7 +1,8 @@
-#ifndef __LED_DRIVER__
-#define __LED_DRIVER__
+#ifndef __DIGITAL_GPIO_DRIVER__
+#define __DIGITAL_GPIO_DRIVER__
 
 #include <stdint.h>
+#include <stdio.h>
 #include "tm4c_cmsis.h"
 
 /*************************************************************************************
@@ -9,13 +10,13 @@
 *						1. Macros used for GPIO pin Initialization
 *
 *************************************************************************************/
+// GPIO degital 
+#define DIGITAL_DISABLE	(0U)
+#define DIGITAL_ENABLE	(1U)
+
 // GPIO direction
 #define GPIO_DIR_INPUT	(0U)
 #define GPIO_DIR_OUTPUT	(1U)
-
-// GPIO open drain
-#define GPIO_OPEN_DRAIN_FALSE	(0U)
-#define GPIO_OPEN_DRAIN_TRUE	(1U)
 
 // GPIO pull-up resistor
 #define GPIO_PULLUP_RESISTOR_FALSE	(0U)
@@ -25,10 +26,9 @@
 #define GPIO_PULLDOWN_RESISTOR_FALSE	(0U)
 #define GPIO_PULLDOWN_RESISTOR_TRUE		(1U)
 
-// GPIO digital enable
-#define GPIO_DIGITAL_FALSE	(0U)
-#define GPIO_DIGITAL_TRUE		(1U)
-
+// GPIO open drain
+#define GPIO_OPEN_DRAIN_FALSE	(0U)
+#define GPIO_OPEN_DRAIN_TRUE	(1U)
 
 // function Macros to enable clocks to GPIO ports
 #define _GPIOA_CLK_ENABLE()			(SYSCTL->RCGC2 |= (1U<<0) )
@@ -57,11 +57,11 @@ typedef struct{
 	
 	uint32_t pin;								// Specify the GPIO pin to be configured
 	uint32_t direction; 				// Specify input or output
-	uint32_t digital;						// Specify if digital or not
 	uint32_t pull_up_resis;			// Specify to add internal pull-up resistor
 	uint32_t pull_down_resis;		// Specify to add internal pull-down resistor
+	uint32_t open_drain;			// Specify to configure as open drain or not
 	
-} gpio_pin_conf_t;
+} gpio_digital_pin_conf_t;
 
 
 
@@ -73,26 +73,26 @@ typedef struct{
 /*****************************************************************
 	* @brief	Initializes the GPIO pin
 	* @param	*GPIOx: base address of GPIO Port
-	* @param	*gpio_pin_conf: pointer to the pin conf structure sent by application
+	* @param	*gpio_digital_pin_conf_t: pointer to the pin conf structure sent by application
 	* @return None
 *****************************************************************/
-void dr_gpio_init(GPIO_Type *GPIOx, gpio_pin_conf_t *gpio_pin_conf);
+void dr_gpio_digital_init(GPIO_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_conf);
 
 /*****************************************************************
 	* @brief	Read the value of the pin
 	* @param	*GPIOx: base address of GPIO Port
 	* @param	pin: pin number to be read
-	* @return None
+	* @return uint32_t with a value of 0 or 1
 *****************************************************************/
-uint32_t dr_pin_read(GPIO_Type *GPIOx, uint16_t pin);
+uint32_t dr_pin_digital_read(GPIO_Type *GPIOx, uint32_t pin);
 
 /*****************************************************************
-	* @brief	Read the value of the pin
+	* @brief	Write a value to the pin
 	* @param	*GPIOx: base address of GPIO Port
 	* @param	pin: pin number to be written to
-  * @param  val: value to be written to pin
+  * @param  val: value to be written to pin; 0 or 1
 	* @return None
 *****************************************************************/
-void dr_pin_write(GPIO_Type *GPIOx, uint16_t pin, uint16_t val);
+void dr_pin_digital_write(GPIO_Type *GPIOx, uint32_t pin, uint32_t val);
 
-#endif //__LED_DRIVER__
+#endif //__DIGITAL_GPIO_DRIVER__

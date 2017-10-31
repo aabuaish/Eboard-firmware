@@ -7,6 +7,8 @@
 #include "tm4c_cmsis.h"
 #include "digitalGPIO_driver.h"
 #include "int_handler.h"
+#include "externGPIO_int.h"
+#include "lm4f120h5qr.h"
 
 
 /*****************************************************************
