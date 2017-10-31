@@ -7,7 +7,7 @@
 	* @param	*gpio_digital_pin_conf_t: pointer to the pin conf structure sent by application
 	* @return None
 *****************************************************************/
-void dr_gpio_digital_init(GPIO_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_conf){
+void dr_gpio_digital_init(GPIOA_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_conf){
 	
 	uint32_t pin = gpio_pin_conf->pin;
 
@@ -56,7 +56,7 @@ void dr_gpio_digital_init(GPIO_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_co
 	* @param	pin: pin number to be read
 	* @return uint32_t with a value of 0 or 1
 *****************************************************************/
-uint32_t dr_pin_digital_read(GPIO_Type *GPIOx, uint32_t pin){
+uint32_t dr_pin_digital_read(GPIOA_Type *GPIOx, uint32_t pin){
 	uint32_t tmp = GPIOx->DATA;
 	tmp = tmp&(1U<<pin);
   
@@ -70,11 +70,11 @@ uint32_t dr_pin_digital_read(GPIO_Type *GPIOx, uint32_t pin){
   * @param  val: value to be written to pin; 0 or 1
 	* @return None
 *****************************************************************/
-void dr_pin_digital_write(GPIO_Type *GPIOx, uint32_t pin, uint32_t val){
+void dr_pin_digital_write(GPIOA_Type *GPIOx, uint32_t pin, uint32_t val){
 	if(val>0){
-		GPIOx->DATA_Bits[(1U<<pin)]	|= (1U<<pin);
+		GPIOx->DATA	|= (1U<<pin);
 	}else{
-		GPIOx->DATA_Bits[(1U<<pin)]	&= ~(1U<<pin);
+		GPIOx->DATA	&= ~(1U<<pin);
 	}
 }
 

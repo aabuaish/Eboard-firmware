@@ -54,7 +54,7 @@ typedef struct{
 	* @param	*gpio_pin_conf: pointer to the pin conf structure sent by application
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_init(GPIO_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin_conf);
+void dr_gpio_extern_int_init(GPIOA_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin_conf);
 
 /*****************************************************************
 	* @brief	This API allows the user to mask/unmask GPIO interrupts
@@ -63,7 +63,7 @@ void dr_gpio_extern_int_init(GPIO_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin_
 	* @param	mask: used to specify whether on not mask an interrupt
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_mask(GPIO_Type *GPIOx, uint32_t pin, uint32_t mask);
+void dr_gpio_extern_int_mask(GPIOA_Type *GPIOx, uint32_t pin, uint32_t mask);
 
 /*****************************************************************
 	* @brief	Clear the interrupt status register to allow interrupts to be triggered again
@@ -71,21 +71,21 @@ void dr_gpio_extern_int_mask(GPIO_Type *GPIOx, uint32_t pin, uint32_t mask);
 	* @param	pin: pin number to be written to
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_clear(GPIO_Type *GPIOx, uint32_t pin);
+void dr_gpio_extern_int_clear(GPIOA_Type *GPIOx, uint32_t pin);
 
 /*****************************************************************
 	* @brief	Enable interrupt to GPIO port
 	* @param	*GPIOx: pointer the GPIO port
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_enable(GPIO_Type *GPIOx);
+void dr_gpio_extern_int_enable(GPIOA_Type *GPIOx);
 
 /*****************************************************************
 	* @brief	Disable interrupt to GPIO port
 	* @param	*GPIOx: pointer the GPIO port
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_disable(GPIO_Type *GPIOx);
+void dr_gpio_extern_int_disable(GPIOA_Type *GPIOx);
 
 /*****************************************************************
 	* @brief	Set priotery level from GPIO port
@@ -94,7 +94,7 @@ void dr_gpio_extern_int_disable(GPIO_Type *GPIOx);
 	* @param	priotery: set priotery level; takes value from 0-7
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_priotery(GPIO_Type *GPIOx, uint32_t priotery);
+void dr_gpio_extern_int_priotery(GPIOA_Type *GPIOx, uint32_t priotery);
 
 
 #endif //__EXTERN_GPOI_INT__

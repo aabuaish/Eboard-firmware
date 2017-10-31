@@ -4,11 +4,12 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "tm4c_cmsis.h"
+#include "TM4C123.h"
 #include "digitalGPIO_driver.h"
 #include "int_handler.h"
 #include "externGPIO_int.h"
 #include "lm4f120h5qr.h"
+#include "GPTimers.h"
 
 
 /*****************************************************************
@@ -24,7 +25,7 @@ void led_init(void);
   * @param	pin: pin to be set
   * @return None
 *****************************************************************/
-void turn_on_led(GPIO_Type *GPIOx, uint32_t pin);
+void turn_on_led(GPIOA_Type *GPIOx, uint32_t pin);
 
 /*****************************************************************
   * @brief	This function is used to turn off the LED specified by pin. 
@@ -32,7 +33,7 @@ void turn_on_led(GPIO_Type *GPIOx, uint32_t pin);
   * @param	pin: pin to be set to zero
   * @return None
 *****************************************************************/
-void turn_off_led(GPIO_Type *GPIOx, uint32_t pin);
+void turn_off_led(GPIOA_Type *GPIOx, uint32_t pin);
 
 /*****************************************************************
   * @brief	This function toggles the value of a pin. 
@@ -40,6 +41,6 @@ void turn_off_led(GPIO_Type *GPIOx, uint32_t pin);
   * @param	pin: pin to be toggled
   * @return None
 *****************************************************************/
-void toggle_led(GPIO_Type *GPIOx, uint32_t pin);
+void toggle_led(GPIOA_Type *GPIOx, uint32_t pin);
 
 #endif //__MAIN__

@@ -19,15 +19,15 @@ void led_init(void){
   gpio_pin_conf.pin = LED_RED;
 	
 	// initializing red led pin in GPIO port F
-  dr_gpio_digital_init(GPIOF_HS, &gpio_pin_conf);
+  dr_gpio_digital_init(GPIOF_AHB, &gpio_pin_conf);
 	
 	// initializing blue led pin in GPIO port F
   gpio_pin_conf.pin = LED_BLUE;
-  dr_gpio_digital_init(GPIOF_HS, &gpio_pin_conf);
+  dr_gpio_digital_init(GPIOF_AHB, &gpio_pin_conf);
 	
 	// initializing green led pin in GPIO port F
   gpio_pin_conf.pin = LED_GREEN;
-  dr_gpio_digital_init(GPIOF_HS, &gpio_pin_conf);
+  dr_gpio_digital_init(GPIOF_AHB, &gpio_pin_conf);
 }
 
 /*****************************************************************
@@ -36,7 +36,7 @@ void led_init(void){
   * @param	pin: pin to be set
   * @return None
 *****************************************************************/
-void turn_on_led(GPIO_Type *GPIOx, uint32_t pin){
+void turn_on_led(GPIOA_Type *GPIOx, uint32_t pin){
   dr_pin_digital_write(GPIOx,  pin, 1);
 }
 
@@ -46,7 +46,7 @@ void turn_on_led(GPIO_Type *GPIOx, uint32_t pin){
   * @param	pin: pin to be set to zero
   * @return None
 *****************************************************************/
-void turn_off_led(GPIO_Type *GPIOx, uint32_t pin){
+void turn_off_led(GPIOA_Type *GPIOx, uint32_t pin){
   dr_pin_digital_write(GPIOx,  pin, 0);
 }
 
@@ -56,7 +56,7 @@ void turn_off_led(GPIO_Type *GPIOx, uint32_t pin){
   * @param	pin: pin to be toggled
   * @return None
 *****************************************************************/
-void toggle_led(GPIO_Type *GPIOx, uint32_t pin){
+void toggle_led(GPIOA_Type *GPIOx, uint32_t pin){
 	uint32_t dummy = dr_pin_digital_read(GPIOx,pin);
   dr_pin_digital_write(GPIOx,  pin, (~dummy)&(1U) );
 }
@@ -81,11 +81,11 @@ int main(){
 
 /*------Configuring LED GPIO pins------*/	
 	led_init();
-	turn_off_led(GPIOF_HS, LED_BLUE);
-	turn_off_led(GPIOF_HS, LED_RED);
-	turn_off_led(GPIOF_HS, LED_GREEN);
+	turn_off_led(GPIOF_AHB, LED_BLUE);
+	turn_off_led(GPIOF_AHB, LED_RED);
+	turn_off_led(GPIOF_AHB, LED_GREEN);
 
-/*------Configuring externla GPIOB pin # interrupt------SART*/
+/*------Configuring external GPIOF pins 0 and 4 interrupts------*/
   _GPIOF_CLK_ENABLE();	// enable clock to GPIO port F
   _GPIOF_AHB_ENABLE();	// enable clock to AHB
 	
@@ -97,12 +97,12 @@ int main(){
   externalInt.edgeOrLevel = EDGE_INT;
   externalInt.edgeTriger = FALLING_EDGE;
   externalInt.priority = 2;
-  dr_gpio_extern_int_init(GPIOF_HS, &externalInt);
+  dr_gpio_extern_int_init(GPIOF_AHB, &externalInt);
 	externalInt.pin = 4;
-  dr_gpio_extern_int_init(GPIOF_HS, &externalInt);
+  dr_gpio_extern_int_init(GPIOF_AHB, &externalInt);
+
+/*------Configuring GP timers ------*/
 	
-	dr_gpio_extern_int_mask(GPIOF_HS, 4, MASK_INT_FALSE);
-     // EdgeCounter_Init();
 	
   while(1){
 		raw = 0xFU;

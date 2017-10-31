@@ -8,7 +8,7 @@
 	* @param	*gpio_pin_conf: pointer to the pin conf structure sent by application
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_init(GPIO_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin_conf){
+void dr_gpio_extern_int_init(GPIOA_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin_conf){
   uint32_t pin = gpio_pin_conf->pin;
 
 /*-------- configuring digital properties --------*/
@@ -80,7 +80,7 @@ __enable_interrupt();
 	* @param	mask: used to specify whether on not mask an interrupt
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_mask(GPIO_Type *GPIOx, uint32_t pin, uint32_t mask){
+void dr_gpio_extern_int_mask(GPIOA_Type *GPIOx, uint32_t pin, uint32_t mask){
   if(mask == MASK_INT_TRUE){
     GPIOx->IM &= ~(1U<<pin);      
   }else{
@@ -95,7 +95,7 @@ void dr_gpio_extern_int_mask(GPIO_Type *GPIOx, uint32_t pin, uint32_t mask){
 	* @param	pin: pin number to be written to
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_clear(GPIO_Type *GPIOx, uint32_t pin){
+void dr_gpio_extern_int_clear(GPIOA_Type *GPIOx, uint32_t pin){
   GPIOx->ICR |= (1U<<pin);
 }
 
@@ -105,20 +105,26 @@ void dr_gpio_extern_int_clear(GPIO_Type *GPIOx, uint32_t pin){
 	* @param	GPIOx: base address of GPIO Port
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_enable(GPIO_Type *GPIOx){
+void dr_gpio_extern_int_enable(GPIOA_Type *GPIOx){
 
-  if(GPIOx == GPIOA || GPIOx == GPIOA_HS){
-    NVIC_EN0_R |= (1U<<0);
-  }else if(GPIOx == GPIOB || GPIOx == GPIOB_HS){
-    NVIC_EN0_R |= (1U<<1);
-  }else if(GPIOx == GPIOC || GPIOx == GPIOC_HS){
-    NVIC_EN0_R |= (1U<<2);
-  }else if(GPIOx == GPIOD || GPIOx == GPIOD_HS){
-    NVIC_EN0_R |= (1U<<3);
-  }else if(GPIOx == GPIOE || GPIOx == GPIOE_HS){
-    NVIC_EN0_R |= (1U<<4);
-  }else if(GPIOx == GPIOF || GPIOx == GPIOF_HS){
-    NVIC_EN0_R |= (1U<<30);
+  if(GPIOx == GPIOA || GPIOx == GPIOA_AHB){
+		NVIC->ISER[0] |= (1U<<0);
+//    NVIC_EN0_R |= (1U<<0);
+  }else if(GPIOx == GPIOB || GPIOx == GPIOB_AHB){
+		NVIC->ISER[0] |= (1U<<1);
+//    NVIC_EN0_R |= (1U<<1);
+  }else if(GPIOx == GPIOC || GPIOx == GPIOC_AHB){
+		NVIC->ISER[0] |= (1U<<2);
+//    NVIC_EN0_R |= (1U<<2);
+  }else if(GPIOx == GPIOD || GPIOx == GPIOD_AHB){
+		NVIC->ISER[0] |= (1U<<3);
+//    NVIC_EN0_R |= (1U<<3);
+  }else if(GPIOx == GPIOE || GPIOx == GPIOE_AHB){
+		NVIC->ISER[0] |= (1U<<4);
+//    NVIC_EN0_R |= (1U<<4);
+  }else if(GPIOx == GPIOF || GPIOx == GPIOF_AHB){
+		NVIC->ISER[0] |= (1U<<30);
+//    NVIC_EN0_R |= (1U<<30);
   }
 
 }
@@ -128,20 +134,26 @@ void dr_gpio_extern_int_enable(GPIO_Type *GPIOx){
 	* @param	*GPIOx: pointer the GPIO port
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_disable(GPIO_Type *GPIOx){
+void dr_gpio_extern_int_disable(GPIOA_Type *GPIOx){
 
-  if(GPIOx == GPIOA || GPIOx == GPIOA_HS){
-    NVIC_EN0_R &= ~(1U<<0);
-  }else if(GPIOx == GPIOB || GPIOx == GPIOB_HS){
-    NVIC_EN0_R &= ~(1U<<1);
-  }else if(GPIOx == GPIOC || GPIOx == GPIOC_HS){
-    NVIC_EN0_R &= ~(1U<<2);
-  }else if(GPIOx == GPIOD || GPIOx == GPIOD_HS){
-    NVIC_EN0_R &= ~(1U<<3);
-  }else if(GPIOx == GPIOE || GPIOx == GPIOE_HS){
-    NVIC_EN0_R &= ~(1U<<4);
-  }else if(GPIOx == GPIOF || GPIOx == GPIOF_HS){
-    NVIC_EN0_R &= ~(1U<<30);
+  if(GPIOx == GPIOA || GPIOx == GPIOA_AHB){
+		NVIC->ISER[0] &= ~(1U<<0);
+//    NVIC_EN0_R &= ~(1U<<0);
+  }else if(GPIOx == GPIOB || GPIOx == GPIOB_AHB){
+		NVIC->ISER[0] &= ~(1U<<1);
+//    NVIC_EN0_R &= ~(1U<<1);
+  }else if(GPIOx == GPIOC || GPIOx == GPIOC_AHB){
+		NVIC->ISER[0] &= ~(1U<<2);
+//    NVIC_EN0_R &= ~(1U<<2);
+  }else if(GPIOx == GPIOD || GPIOx == GPIOD_AHB){
+		NVIC->ISER[0] &= ~(1U<<3);
+//    NVIC_EN0_R &= ~(1U<<3);
+  }else if(GPIOx == GPIOE || GPIOx == GPIOE_AHB){
+		NVIC->ISER[0] &= ~(1U<<4);
+//    NVIC_EN0_R &= ~(1U<<4);
+  }else if(GPIOx == GPIOF || GPIOx == GPIOF_AHB){
+		NVIC->ISER[0] &= ~(1U<<30);
+//    NVIC_EN0_R &= ~(1U<<30);
   }
 
 }
@@ -152,19 +164,19 @@ void dr_gpio_extern_int_disable(GPIO_Type *GPIOx){
 	* @param	priotery: set priotery level; takes value from 0-7
 	* @return None
 *****************************************************************/
-void dr_gpio_extern_int_priotery(GPIO_Type *GPIOx, uint32_t priority){
+void dr_gpio_extern_int_priotery(GPIOA_Type *GPIOx, uint32_t priority){
   
-  if(GPIOx == GPIOA || GPIOx == GPIOA_HS){
+  if(GPIOx == GPIOA || GPIOx == GPIOA_AHB){
     NVIC_PRI0_R = (NVIC_PRI0_R&0xFFFFFF00)|(priority<<5);
-  }else if(GPIOx == GPIOB || GPIOx == GPIOB_HS){
+  }else if(GPIOx == GPIOB || GPIOx == GPIOB_AHB){
     NVIC_PRI0_R = (NVIC_PRI0_R&0xFFFF00FF)|(priority<<13);
-  }else if(GPIOx == GPIOC || GPIOx == GPIOC_HS){
+  }else if(GPIOx == GPIOC || GPIOx == GPIOC_AHB){
     NVIC_PRI0_R = (NVIC_PRI0_R&0xFF00FFFF)|(priority<<21);
-  }else if(GPIOx == GPIOD || GPIOx == GPIOD_HS){
+  }else if(GPIOx == GPIOD || GPIOx == GPIOD_AHB){
     NVIC_PRI0_R = (NVIC_PRI0_R&0x00FFFFFF)|(priority<<29);
-  }else if(GPIOx == GPIOE || GPIOx == GPIOE_HS){
+  }else if(GPIOx == GPIOE || GPIOx == GPIOE_AHB){
     NVIC_PRI1_R = (NVIC_PRI1_R&0xFFFFFF00)|(priority<<5);
-  }else if(GPIOx == GPIOF || GPIOx == GPIOF_HS){
+  }else if(GPIOx == GPIOF || GPIOx == GPIOF_AHB){
     NVIC_PRI7_R = (NVIC_PRI7_R&0xFF00FFFF)|(priority<<21);
   }
 

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <stdio.h>
-#include "tm4c_cmsis.h"
+#include "TM4C123.h"
 
 /*************************************************************************************
 *
@@ -39,12 +39,12 @@
 #define _GPIOF_CLK_ENABLE()			(SYSCTL->RCGC2 |= (1U<<5) )
 
 // function Macros to enable AHB
-#define _GPIOA_AHB_ENABLE()			(SYSCTL->GPIOHSCTL |= (1U<<0) )
-#define _GPIOB_AHB_ENABLE()			(SYSCTL->GPIOHSCTL |= (1U<<1) )
-#define _GPIOC_AHB_ENABLE()			(SYSCTL->GPIOHSCTL |= (1U<<2) )
-#define _GPIOD_AHB_ENABLE()			(SYSCTL->GPIOHSCTL |= (1U<<3) )
-#define _GPIOE_AHB_ENABLE()			(SYSCTL->GPIOHSCTL |= (1U<<4) )
-#define _GPIOF_AHB_ENABLE()			(SYSCTL->GPIOHSCTL |= (1U<<5) )
+#define _GPIOA_AHB_ENABLE()			(SYSCTL->GPIOHBCTL |= (1U<<0) )
+#define _GPIOB_AHB_ENABLE()			(SYSCTL->GPIOHBCTL |= (1U<<1) )
+#define _GPIOC_AHB_ENABLE()			(SYSCTL->GPIOHBCTL |= (1U<<2) )
+#define _GPIOD_AHB_ENABLE()			(SYSCTL->GPIOHBCTL |= (1U<<3) )
+#define _GPIOE_AHB_ENABLE()			(SYSCTL->GPIOHBCTL |= (1U<<4) )
+#define _GPIOF_AHB_ENABLE()			(SYSCTL->GPIOHBCTL |= (1U<<5) )
 
 /*************************************************************************************
 *
@@ -76,7 +76,7 @@ typedef struct{
 	* @param	*gpio_digital_pin_conf_t: pointer to the pin conf structure sent by application
 	* @return None
 *****************************************************************/
-void dr_gpio_digital_init(GPIO_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_conf);
+void dr_gpio_digital_init(GPIOA_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_conf);
 
 /*****************************************************************
 	* @brief	Read the value of the pin
@@ -84,7 +84,7 @@ void dr_gpio_digital_init(GPIO_Type *GPIOx, gpio_digital_pin_conf_t *gpio_pin_co
 	* @param	pin: pin number to be read
 	* @return uint32_t with a value of 0 or 1
 *****************************************************************/
-uint32_t dr_pin_digital_read(GPIO_Type *GPIOx, uint32_t pin);
+uint32_t dr_pin_digital_read(GPIOA_Type *GPIOx, uint32_t pin);
 
 /*****************************************************************
 	* @brief	Write a value to the pin
@@ -93,6 +93,6 @@ uint32_t dr_pin_digital_read(GPIO_Type *GPIOx, uint32_t pin);
   * @param  val: value to be written to pin; 0 or 1
 	* @return None
 *****************************************************************/
-void dr_pin_digital_write(GPIO_Type *GPIOx, uint32_t pin, uint32_t val);
+void dr_pin_digital_write(GPIOA_Type *GPIOx, uint32_t pin, uint32_t val);
 
 #endif //__DIGITAL_GPIO_DRIVER__
