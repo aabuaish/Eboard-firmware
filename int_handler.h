@@ -10,7 +10,7 @@
 #define LED_BLUE  (2U)
 #define LED_GREEN (3U)
 
-#define SYS_CLOCK_HZ 16000000U
+#define SYS_CLOCK_HZ 25000000U
 
 
 #endif //__BSP__

@@ -64,6 +64,9 @@ void toggle_led(GPIOA_Type *GPIOx, uint32_t pin){
 
 volatile uint32_t  raw;
 volatile uint32_t  masked;
+volatile uint32_t  val;
+volatile uint32_t  reset = 0;
+volatile uint32_t speedCommand = 0;
 
 /*****************************************************************
   * @brief	This is the main function. 
@@ -73,6 +76,10 @@ volatile uint32_t  masked;
 *****************************************************************/
 int main(){
 
+/*------System clock configuration ------*/
+	SystemCoreClockUpdate();
+	SystemInit();
+	
 /*------Configuring SysTic interrupt to execute every 0.5 sec------*/
 	SysTick->LOAD = SYS_CLOCK_HZ/2 - 1;
   SysTick->VAL = 0U;
@@ -102,11 +109,24 @@ int main(){
   dr_gpio_extern_int_init(GPIOF_AHB, &externalInt);
 
 /*------Configuring GP timers ------*/
-	
-	
+dr_timer0_init_32();
+
+  uint32_t counter = 0;
   while(1){
-		raw = 0xFU;
-		masked = 0xFU<<4;
+
+		counter++;
+    if(counter == 50000){
+      val = TIMER0->TAV;
+			counter = 0;
+    }
+		
+		if(reset == 1){
+			dr_timer0_enable(TIMER0_DISABLE);
+			val = dr_timer0_read_val();
+			dr_timer0_set_val(0);
+			//TIMER0->CTL |= (1U<<0);
+			val = dr_timer0_read_val();
+		}
 		//printf("dummy=%d\n",dummy);
 		
 	}

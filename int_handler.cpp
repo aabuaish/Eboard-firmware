@@ -1,5 +1,7 @@
 #include "int_handler.h"
 
+extern uint32_t speedCommand;
+
 __stackless void assert_failed (char const *file, int line) {
 	NVIC_SystemReset();
 }
@@ -13,7 +15,7 @@ void SystemTick::Handler(){
 			toggle_led(GPIOF_AHB, LED_GREEN);
 			counter++;
 		}else {
-			toggle_led(GPIOF_AHB, LED_RED);
+			toggle_led(GPIOF_AHB, LED_BLUE);
 			counter = 0;
 		}
 	}
@@ -21,8 +23,15 @@ void SystemTick::Handler(){
 }
 
 void GPIOPortA_IRQHandler::Handler() {
-	dr_gpio_extern_int_clear(GPIOA_AHB,4);
-	toggle_led(GPIOF_AHB, LED_RED);
+  if(GPIOA_AHB->MIS&(1U<<0)){
+    dr_timer0_set_val(0);
+    dr_timer0_enable(TIMER0_ENABLE);
+    dr_gpio_extern_int_clear(GPIOA_AHB, 0);
+  } else if(GPIOA_AHB->MIS&(1U<<1)){
+    speedCommand = dr_timer0_read_val();
+    dr_timer0_enable(TIMER0_DISABLE);
+    dr_gpio_extern_int_clear(GPIOA_AHB, 1);
+  }
 }
 
 void GPIOPortB_IRQHandler::Handler() {
@@ -31,13 +40,11 @@ void GPIOPortB_IRQHandler::Handler() {
 }
 
 void GPIOPortD_IRQHandler::Handler() {
-	dr_gpio_extern_int_clear(GPIOD_AHB,4);
-	toggle_led(GPIOF_AHB, LED_RED);
+
 }
 
 void GPIOPortE_IRQHandler::Handler() {
-	dr_gpio_extern_int_clear(GPIOE_AHB,1);
-	toggle_led(GPIOF_AHB, LED_RED);
+
 }
 
 void GPIOPortF_IRQHandler::Handler() {
