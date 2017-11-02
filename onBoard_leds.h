@@ -1,23 +1,33 @@
-#ifndef __MAIN__
-#define __MAIN__
+#ifndef __ON_BOARD_LEDS__
+#define __ON_BOARD_LEDS__
 
-#include <stdint.h>
-#include <stdio.h>
+#include "main.h"
 
-#include "TM4C123.h"
-#include "digitalGPIO_driver.h"
-#include "int_handler.h"
-#include "externGPIO_int.h"
-#include "lm4f120h5qr.h"
-#include "GPTimers.h"
-#include "remoteController.h"
-#include "onBoard_leds.h"
+/*************************************************************************************
+*
+*						1. Macros used for GPIO pin Initialization
+*
+*************************************************************************************/
 
+
+/*************************************************************************************
+*
+*						2. Defining structure for Driver API
+*
+*************************************************************************************/
+
+
+/*************************************************************************************
+*
+*						3. Creating the API
+*
+*************************************************************************************/
 
 /*****************************************************************
   * @brief	This function initializes and configures the GPIO pins. 
   * @param	None
   * @return None
+	* date: October 25
 *****************************************************************/
 void led_init(void);
 
@@ -45,4 +55,6 @@ void turn_off_led(GPIOA_Type *GPIOx, uint32_t pin);
 *****************************************************************/
 void toggle_led(GPIOA_Type *GPIOx, uint32_t pin);
 
-#endif //__MAIN__
+
+
+#endif //__ON_BOARD_LEDS__

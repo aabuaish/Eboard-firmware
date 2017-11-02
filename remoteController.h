@@ -20,18 +20,6 @@
 *						2. Defining structure for Driver API
 *
 *************************************************************************************/
-// Application should use Macros defined above to specify pin driver and configuration
-
-//typedef struct{
-//	
-//	uint32_t pin;								// Specify the GPIO pin to be configured
-//	uint32_t direction; 				// Specify input or output
-//	uint32_t pull_up_resis;			// Specify to add internal pull-up resistor
-//	uint32_t pull_down_resis;		// Specify to add internal pull-down resistor
-//	uint32_t open_drain;			// Specify to configure as open drain or not
-//	
-//} gpio_digital_pin_conf_t;
-
 
 
 /*************************************************************************************
