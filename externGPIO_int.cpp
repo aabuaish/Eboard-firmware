@@ -18,7 +18,7 @@ void dr_gpio_extern_int_init(GPIOA_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin
   if(gpio_pin_conf->edgeTriger == FALLING_EDGE){
     digital_GPIO.pull_up_resis = GPIO_PULLUP_RESISTOR_TRUE;
     digital_GPIO.pull_down_resis = GPIO_PULLDOWN_RESISTOR_FALSE;
-  }else if(gpio_pin_conf->edgeTriger == RISING_EEDGE){
+  }else if(gpio_pin_conf->edgeTriger == RISING_EDGE){
     digital_GPIO.pull_up_resis = GPIO_PULLUP_RESISTOR_FALSE;
     digital_GPIO.pull_down_resis = GPIO_PULLDOWN_RESISTOR_TRUE;
   }else{  // both edges
@@ -48,7 +48,7 @@ void dr_gpio_extern_int_init(GPIOA_Type *GPIOx, gpio_extern_int_conf_t *gpio_pin
   if(gpio_pin_conf->edgeTriger == FALLING_EDGE){
     GPIOx->IBE &= ~(1U<<pin);   // clearing the bit disables both edge detection
     GPIOx->IEV &= ~(1U<<pin);   // clearing the bit enable both falling edge detection
-  }else if(gpio_pin_conf->edgeTriger == RISING_EEDGE){
+  }else if(gpio_pin_conf->edgeTriger == RISING_EDGE){
     GPIOx->IBE &= ~(1U<<pin);   // clearing the bit disables both edge detection
     GPIOx->IEV |= (1U<<pin);    // setting the bit enable both rising edge detection
   }else{  // both edges

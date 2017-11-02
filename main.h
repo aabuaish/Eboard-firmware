@@ -10,6 +10,7 @@
 #include "externGPIO_int.h"
 #include "lm4f120h5qr.h"
 #include "GPTimers.h"
+#include "remoteController.h"
 
 
 /*****************************************************************

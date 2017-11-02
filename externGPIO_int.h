@@ -16,7 +16,7 @@
 
 // detect on which edge
 #define FALLING_EDGE	(0U)
-#define RISING_EEDGE	(1U)
+#define RISING_EDGE	(1U)
 #define RISING_AND_FALLING_EDGE	(2U)
 
 // Masking interupprts

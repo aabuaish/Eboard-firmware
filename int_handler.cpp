@@ -1,6 +1,7 @@
 #include "int_handler.h"
 
 extern uint32_t speedCommand;
+extern uint32_t window;
 
 __stackless void assert_failed (char const *file, int line) {
 	NVIC_SystemReset();
@@ -20,27 +21,74 @@ void SystemTick::Handler(){
 		}
 	}
 	
+	if(counter == 0){
+		io_remoteControl_enable(REMOTE_CONTROLLER_DISABLE, GPIOB_AHB, 0, 1);
+		dr_pin_digital_write(GPIOA_AHB, 2, 0);
+		dr_pin_digital_write(GPIOA_AHB, 3, 0);
+		dr_pin_digital_write(GPIOA_AHB, 4, 0);
+		window = 0;
+	}else if(counter == 1){
+		io_remoteControl_enable(REMOTE_CONTROLLER_ENABLE, GPIOB_AHB, 0, 1);
+		dr_gpio_extern_int_clear(GPIOB_AHB, 0);
+		dr_gpio_extern_int_clear(GPIOB_AHB, 1);
+		window = 1;
+	}else if(counter == 2){
+		io_remoteControl_enable(REMOTE_CONTROLLER_DISABLE, GPIOB_AHB, 0, 1);
+		dr_pin_digital_write(GPIOA_AHB, 2, 0);
+		dr_pin_digital_write(GPIOA_AHB, 3, 0);
+		dr_pin_digital_write(GPIOA_AHB, 4, 0);
+		window = 2;
+	}else if(counter == 3){
+		io_remoteControl_enable(REMOTE_CONTROLLER_DISABLE, GPIOB_AHB, 0, 1);
+		dr_pin_digital_write(GPIOA_AHB, 2, 0);
+		dr_pin_digital_write(GPIOA_AHB, 3, 0);
+		dr_pin_digital_write(GPIOA_AHB, 4, 0);
+		window = 3;
+	}
+
+  if(counter>=3){
+    counter = 0;
+  }else{
+    counter++;
+  }
+
 }
 
 void GPIOPortA_IRQHandler::Handler() {
-  if(GPIOA_AHB->MIS&(1U<<0)){
-    dr_timer0_set_val(0);
-    dr_timer0_enable(TIMER0_ENABLE);
-    dr_gpio_extern_int_clear(GPIOA_AHB, 0);
-  } else if(GPIOA_AHB->MIS&(1U<<1)){
-    speedCommand = dr_timer0_read_val();
-    dr_timer0_enable(TIMER0_DISABLE);
-    dr_gpio_extern_int_clear(GPIOA_AHB, 1);
-  }
+
 }
 
 void GPIOPortB_IRQHandler::Handler() {
-	dr_gpio_extern_int_clear(GPIOB_AHB,4);
-	toggle_led(GPIOF_AHB, LED_RED);
+  if(GPIOB_AHB->MIS&(1U<<0)){
+    dr_timer0_set_val(0);
+    dr_timer0_enable(TIMER0_ENABLE);
+    dr_gpio_extern_int_clear(GPIOB_AHB, 0);
+		dr_pin_digital_write(GPIOA_AHB, 2, 1);
+  } else if(GPIOB_AHB->MIS&(1U<<1)){
+    speedCommand = dr_timer0_read_val();
+    dr_timer0_enable(TIMER0_DISABLE);
+    dr_gpio_extern_int_clear(GPIOB_AHB, 1);
+		dr_pin_digital_write(GPIOA_AHB, 3, 1);
+	}else{
+		dr_gpio_extern_int_clear(GPIOB_AHB, 0);
+		dr_gpio_extern_int_clear(GPIOB_AHB, 1);
+		dr_pin_digital_write(GPIOA_AHB, 4, 1);
+	}
 }
 
 void GPIOPortD_IRQHandler::Handler() {
-
+  if(GPIOD_AHB->MIS&(1U<<2)){
+    dr_timer0_set_val(0);
+    dr_timer0_enable(TIMER0_ENABLE);
+    dr_gpio_extern_int_clear(GPIOD_AHB, 2);
+  } else if(GPIOD_AHB->MIS&(1U<<3)){
+    speedCommand = dr_timer0_read_val();
+    dr_timer0_enable(TIMER0_DISABLE);
+    dr_gpio_extern_int_clear(GPIOD_AHB, 3);
+	}else{
+		dr_gpio_extern_int_clear(GPIOD_AHB, 2);
+		dr_gpio_extern_int_clear(GPIOD_AHB, 3);
+	}
 }
 
 void GPIOPortE_IRQHandler::Handler() {
