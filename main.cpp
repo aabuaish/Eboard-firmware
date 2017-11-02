@@ -69,6 +69,10 @@ volatile uint32_t  reset = 0;
 volatile uint32_t speedCommand = 0;
 volatile uint32_t probe;
 volatile uint32_t window = 0;
+volatile uint32_t GPIO_global = 0xBBBBBBBB;
+volatile uint32_t GPIO_global2 = 0xBBBBBBBB;
+volatile uint32_t count = 0;
+volatile uint32_t countInterrupt = 0;
 
 /*****************************************************************
   * @brief	This is the main function. 
@@ -147,11 +151,25 @@ int main(){
   debug.pin = 4;
   dr_gpio_digital_init(GPIOA_AHB, &debug);
 
+  debug.pin = 6;
+  dr_gpio_digital_init(GPIOA_AHB, &debug);
+
+  debug.pin = 7;
+  dr_gpio_digital_init(GPIOA_AHB, &debug);
+
+/*------configuring GP timer tester ------*/
+//	dr_timer0_init_32();
 
 /*------Enabling interrupts ------*/
 	__enable_interrupt();
 	
   uint32_t counter = 0;
+	
+	dr_timer0_set_val(0xBB70);
+	GPIO_global = 0xFFFFFFFF;
+	GPIO_global2 = 0xFFFFFFFF;
+	
+//	dr_gpio_extern_int_mask(GPIOB_AHB, pin, );
 	
   while(1){
 
