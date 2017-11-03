@@ -12,6 +12,7 @@
 #include "GPTimers.h"
 #include "remoteController.h"
 #include "onBoard_leds.h"
+#include "pwmDrivers.h"
 
 
 /*****************************************************************

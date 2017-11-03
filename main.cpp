@@ -39,9 +39,6 @@ int main(){
   _GPIOF_CLK_ENABLE();	// enable clock to GPIO port F
   _GPIOF_AHB_ENABLE();	// enable clock to AHB
 	
-  _GPIOE_CLK_ENABLE();	// enable clock to GPIO port E
-  _GPIOE_AHB_ENABLE();	// enable clock to AHB
-	
   gpio_extern_int_conf_t externalInt;
   externalInt.pin = 0;
   externalInt.edgeOrLevel = EDGE_INT;
@@ -51,13 +48,15 @@ int main(){
 	externalInt.pin = 4;
   dr_gpio_extern_int_init(GPIOF_AHB, &externalInt);
 
-/*------Configuring GP timers ------*/
+/*------Configuring GP timers and remote controller------*/
 	dr_timer0_init_32();
 	io_remote_control_GPIO_conf(GPIOB_AHB, 0, 1);
 
 /*------Enabling interrupts ------*/
 	__enable_interrupt();
 	
+/*------Configuring PWM ------*/
+  pwm_init(PWM0, GPIOB_AHB, 6);
 	
   while(1){
 		
