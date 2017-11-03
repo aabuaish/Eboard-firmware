@@ -31,8 +31,8 @@
 *************************************************************************************/
 typedef struct {
   uint32_t pin;
-  uint32_t loadVal;
-  uint32_t cmpVal;
+  uint32_t freq;
+  float duty;
 
 } pwm_pin_config_t;
 
@@ -46,12 +46,40 @@ typedef struct {
   * @brief	This function initializes the PWM pin and module
   * @param	*pwm: this is a pointer to the PWM module
   * @param	*GPIOx: pointer the GPIO port
-  * @param	pin: pin to configure as pwm
+  * @param	configStruct: structure that has pin configuration info
   * @return None
 	* date: October 25
 *****************************************************************/
-void pwm_init(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
+void dr_pwm_init(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStruct);
 
+/*****************************************************************
+  * @brief	Enables pwm pin
+  * @param	*pwm: this is a pointer to the PWM module
+  * @param	*GPIOx: pointer the GPIO port
+  * @param	pin: pwm pin to be enabled
+  * @return None
+	* date: October 25
+*****************************************************************/
+void dr_pwm_enable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
 
+/*****************************************************************
+  * @brief	Disbales pwm pin
+  * @param	*pwm: this is a pointer to the PWM module
+  * @param	*GPIOx: pointer the GPIO port
+  * @param	pin: pwm pin to be disabled
+  * @return None
+	* date: October 25
+*****************************************************************/
+void dr_pwm_disable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
+
+/*****************************************************************
+  * @brief	Set the value of PWM
+  * @param	*pwm: this is a pointer to the PWM module
+  * @param	*GPIOx: pointer the GPIO port
+  * @param	configStruct: structure that has pin configuration info
+  * @return None
+	* date: October 25
+*****************************************************************/
+void dr_pwm_freq_duty_set(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStruct);
 
 #endif //__PWM_DRIVERS__

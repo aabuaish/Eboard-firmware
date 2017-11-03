@@ -5,6 +5,8 @@
 /*****************************************************************
 ****************************Variables*****************************/
 volatile uint32_t speedCommand;
+volatile uint32_t probe1 = 0xFFFFFFFF;
+volatile uint32_t probe2 = 0xFFFFFFFF;
 
 /******************************************************************
 *****************************************************************/
@@ -56,7 +58,16 @@ int main(){
 	__enable_interrupt();
 	
 /*------Configuring PWM ------*/
-  pwm_init(PWM0, GPIOB_AHB, 6);
+  pwm_pin_config_t pwmSpecs;
+  pwmSpecs.pin = 6;
+  pwmSpecs.freq = 25000;
+  pwmSpecs.duty = 50;
+
+  dr_pwm_init(PWM0, GPIOB_AHB, &pwmSpecs);
+	
+	pwmSpecs.duty = 80;
+	dr_pwm_freq_duty_set(PWM0, GPIOB_AHB, &pwmSpecs);
+
 	
   while(1){
 		

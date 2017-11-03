@@ -21,23 +21,6 @@ void SystemTick::Handler(){
 	}
 	
 	if(counter == 0){
-		static uint32_t duty = 0;
-		static uint32_t direction = 0;
-
-		if(direction == 0){
-			duty += 2;
-		}else{
-			duty -= 2;
-		}
-
-		if(duty>=319){
-			direction = 1;
-		} else if(duty<=0){
-			direction = 0;
-			duty = 0;
-		}
-		
-		PWM0->_0_CMPA = duty;
 		io_remoteControl_enable(REMOTE_CONTROLLER_DISABLE, GPIOB_AHB, 0, 1);
 	}else if(counter == 1){
 		io_remoteControl_enable(REMOTE_CONTROLLER_DISABLE, GPIOB_AHB, 0, 1);
