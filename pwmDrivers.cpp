@@ -9,7 +9,7 @@ extern uint32_t probe2;
   * @param	*GPIOx: pointer the GPIO port
   * @param	pin: pin to configure as pwm
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_init(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStruct){
   float tmp = configStruct->duty;
@@ -233,7 +233,7 @@ void dr_pwm_init(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStr
   * @param	*GPIOx: pointer the GPIO port
   * @param	pin: pwm pin to be enabled
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_enable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin){
   if(pwmx == PWM0){
@@ -333,7 +333,7 @@ void dr_pwm_enable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin){
   * @param	*GPIOx: pointer the GPIO port
   * @param	pin: pwm pin to be disabled
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_disable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin){
   if(pwmx == PWM0){
@@ -434,7 +434,7 @@ void dr_pwm_disable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin){
   * @param	*GPIOx: pointer the GPIO port
   * @param	duty: value of duty cycle from 0 to 100 %
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_freq_duty_set(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStruct){
   float tmp = configStruct->duty;

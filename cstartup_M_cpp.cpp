@@ -47,13 +47,13 @@ extern "C" const intvec_elem __vector_table[] =
   0,
   PendSV::Handler,
   SystemTick::Handler,
-	
-	
-	GPIOPortA_IRQHandler::Handler,
-	GPIOPortB_IRQHandler::Handler,
-	GPIOPortC_IRQHandler::Handler,
-	GPIOPortD_IRQHandler::Handler,
-	GPIOPortE_IRQHandler::Handler,
+  
+  
+  GPIOPortA_IRQHandler::Handler,
+  GPIOPortB_IRQHandler::Handler,
+  GPIOPortC_IRQHandler::Handler,
+  GPIOPortD_IRQHandler::Handler,
+  GPIOPortE_IRQHandler::Handler,
   UART0_IRQHandler::Handler,
   UART1_IRQHandler::Handler,
   SSI0_IRQHandler::Handler,

@@ -8,21 +8,7 @@
 *						1. Macros used for GPIO pin Initialization
 *
 *************************************************************************************/
-// PWM generators
-#define PWM_GEN0_DR  (0U)
-#define PWM_GEN1_DR  (0U)
-#define PWM_GEN2_DR  (0U)
-#define PWM_GEN3_DR  (0U)
 
-// PWM pin
-#define PWM_PIN0_DR  (0U)
-#define PWM_PIN1_DR  (1U)
-#define PWM_PIN2_DR  (2U)
-#define PWM_PIN3_DR  (3U)
-#define PWM_PIN4_DR  (4U)
-#define PWM_PIN5_DR  (5U)
-#define PWM_PIN6_DR  (6U)
-#define PWM_PIN7_DR  (7U)
 
 /*************************************************************************************
 *
@@ -48,7 +34,7 @@ typedef struct {
   * @param	*GPIOx: pointer the GPIO port
   * @param	configStruct: structure that has pin configuration info
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_init(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStruct);
 
@@ -58,7 +44,7 @@ void dr_pwm_init(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStr
   * @param	*GPIOx: pointer the GPIO port
   * @param	pin: pwm pin to be enabled
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_enable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
 
@@ -68,7 +54,7 @@ void dr_pwm_enable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
   * @param	*GPIOx: pointer the GPIO port
   * @param	pin: pwm pin to be disabled
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_disable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
 
@@ -78,7 +64,7 @@ void dr_pwm_disable(PWM0_Type *pwmx, GPIOA_Type *GPIOx, uint32_t pin);
   * @param	*GPIOx: pointer the GPIO port
   * @param	configStruct: structure that has pin configuration info
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void dr_pwm_freq_duty_set(PWM0_Type *pwmx, GPIOA_Type *GPIOx, pwm_pin_config_t *configStruct);
 

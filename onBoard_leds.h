@@ -27,7 +27,7 @@
   * @brief	This function initializes and configures the GPIO pins. 
   * @param	None
   * @return None
-	* date: October 25
+  * date: October 25
 *****************************************************************/
 void led_init(void);
 
