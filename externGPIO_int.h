@@ -36,8 +36,8 @@ typedef struct{
   
   uint32_t pin;           // Specify the GPIO pin to be configured
   uint32_t edgeOrLevel;   // Specify whether to detect on edge or voltage level
-  uint32_t edgeTriger;    // Specify on which edge to triger the interrupt on
-  uint32_t priority;      // Specify the priotery of the interrupt 0-7
+  uint32_t edgeTriger;    // Specify on which edge to trigger the interrupt on
+  uint32_t priority;      // Specify the priority  of the interrupt 0-7
 
 } gpio_extern_int_conf_t;
 

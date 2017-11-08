@@ -5,7 +5,6 @@
 #include "main.h"
 #include "cstartup_M_cpp.h"
 
-//#include "tm4c_cmsis.h"
 #define LED_RED   (1U)
 #define LED_BLUE  (2U)
 #define LED_GREEN (3U)

@@ -16,9 +16,9 @@
 *
 *************************************************************************************/
 typedef struct {
-  uint32_t pin;
-  uint32_t freq;
-  float duty;
+  uint32_t pin;   // GPIO pin that generate the PWM signal
+  uint32_t freq;  // frequency of the PWM signal
+  float duty;     // duty cycle of the PWM signal; range from 0 to 100
 
 } pwm_pin_config_t;
 
